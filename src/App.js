@@ -14,7 +14,7 @@ function App() {
       "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=QTVKD8VAWG4J36D6"
     ).then((res) =>
       res.json().then((data) => {
-        console.log(data["Time Series (5min)"]);
+        console.log(data);
         setNewData(data);
         setIsdatachanged(true);
       })
@@ -45,7 +45,6 @@ function App() {
   useEffect(() => {
     setVolumeDataGraph(volume);
     setCandleDataGraph(finalCandleStick);
-    console.log("im inside set function");
   }, [isDataChanged]);
 
   // if (Object.keys(newData).length !== 0) {

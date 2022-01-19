@@ -60,7 +60,7 @@ const ChartComponents = (props) => {
       },
       plotOptions: {
         bar: {
-          columnWidth: "50%",
+          columnWidth: "80%",
           colors: {
             ranges: [
               {
