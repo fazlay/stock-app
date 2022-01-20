@@ -1,10 +1,11 @@
 import React from "react";
-import ApexCharts from "apexcharts";
 import ReactApexChart from "react-apexcharts";
+import { macd } from "technicalindicators";
 
 const ChartComponents = (props) => {
-  const { candleDataGraph, volumeDataGraph } = props;
-  console.log(candleDataGraph, volumeDataGraph);
+  const { candleDataGraph, volumeDataGraph, historygram, signal, macd } = props;
+  console.log(historygram, signal, macd);
+
   const chartData = {
     series: [
       {
@@ -50,13 +51,25 @@ const ChartComponents = (props) => {
     },
     seriesBar: [
       {
-        name: "Cash Flow",
-        data: volumeDataGraph,
+        name: "Historygram",
+        type: "bar",
+        data: historygram,
+      },
+      {
+        name: "Signal",
+        type: "line",
+        data: signal,
+      },
+      {
+        name: "MACD",
+        type: "line",
+        data: macd,
       },
     ],
     optionsBar: {
       stroke: {
-        show: false,
+        show: true,
+        width: 2,
       },
       plotOptions: {
         bar: {
@@ -64,13 +77,13 @@ const ChartComponents = (props) => {
           colors: {
             ranges: [
               {
-                from: -1000,
+                from: -10,
                 to: 0,
                 color: "#F15B46",
               },
               {
-                from: 1,
-                to: 10000,
+                from: 0.0001,
+                to: 10,
                 color: "#FEB019",
               },
             ],
@@ -79,7 +92,7 @@ const ChartComponents = (props) => {
       },
       chart: {
         height: 160,
-        type: "bar",
+
         brush: {
           enabled: true,
           target: "candles",
@@ -110,8 +123,8 @@ const ChartComponents = (props) => {
 
       <ReactApexChart
         options={chartData.optionsBar}
-        series={chartData.seriesBar}
         type="bar"
+        series={chartData.seriesBar}
         height={160}
       />
     </>
