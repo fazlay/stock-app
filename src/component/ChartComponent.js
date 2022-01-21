@@ -1,10 +1,10 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { macd } from "technicalindicators";
+import "../App.css";
 
 const ChartComponents = (props) => {
-  const { candleDataGraph, volumeDataGraph, historygram, signal, macd } = props;
-  console.log(historygram, signal, macd);
+  const { candleDataGraph, historygram, signal, macd } = props;
+  // console.log(candleDataGraph, signal, macd);
 
   const chartData = {
     series: [
@@ -40,9 +40,7 @@ const ChartComponents = (props) => {
         tickPlacement: "between",
       },
       yaxis: {
-        legend: {
-          title: "dan",
-        },
+        show: true,
       },
     },
 
@@ -53,6 +51,7 @@ const ChartComponents = (props) => {
       {
         name: "Historygram",
         type: "bar",
+
         data: historygram,
       },
       {
@@ -69,7 +68,7 @@ const ChartComponents = (props) => {
     optionsBar: {
       stroke: {
         show: true,
-        width: 2,
+        width: 1,
       },
       plotOptions: {
         bar: {
@@ -82,7 +81,7 @@ const ChartComponents = (props) => {
                 color: "#F15B46",
               },
               {
-                from: 0.0001,
+                from: 0.001,
                 to: 10,
                 color: "#FEB019",
               },
@@ -98,11 +97,21 @@ const ChartComponents = (props) => {
           target: "candles",
         },
         selection: {
-          enabled: true,
-          //   xaxis: {
-          //     min: new Date('20 Jan 2022').getTime(),
-          //     max: new Date('10 Dec 2022').getTime()
-          //   },
+          enabled: false,
+          yaxis: {
+            labels: {
+              formatter: function (value) {
+                return value + "$";
+              },
+            },
+          },
+          xaxis: {
+            labels: {
+              formatter: function (value) {
+                return value;
+              },
+            },
+          },
           fill: {
             color: "#ccc",
             opacity: 0.4,
@@ -115,6 +124,7 @@ const ChartComponents = (props) => {
   return (
     <>
       <ReactApexChart
+        className="candleStick"
         options={chartData.options}
         series={chartData.series}
         type="candlestick"
@@ -122,10 +132,12 @@ const ChartComponents = (props) => {
       />
 
       <ReactApexChart
+        className="barChart"
         options={chartData.optionsBar}
         type="bar"
         series={chartData.seriesBar}
         height={160}
+        width={1250}
       />
     </>
   );
