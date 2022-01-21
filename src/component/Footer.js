@@ -3,7 +3,7 @@ import "../App.css";
 const Footer = () => {
   return (
     <div className="footer">
-      <h4>Stock Today@copyright 2020</h4>
+      <h4>Stock Today@copyright 2022</h4>
     </div>
   );
 };
